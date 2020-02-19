@@ -1,0 +1,5 @@
+mixin svg-icon(name, mod)
+    - var mod = mod ? `sprite__${name}_${mod}` : '';
+
+    svg(class='sprite ' + `sprite__${name} ${mod}`)
+        use(xlink:href="svg/sprite.svg#" + name)
