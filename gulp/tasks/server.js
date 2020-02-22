@@ -4,8 +4,12 @@ const {
 }                 = require('gulp');
 const config 	    = require('../config.js');
 const browserSync = require('browser-sync').create();
+const args        = require('yargs').argv;
 
-const templates   = require('./templates');
+const env = args.env || 'dev';
+
+const templates   = (env === 'dev') ? require('./template-incremental-build') : require('./templates');
+
 const styles      = require('./styles');
 const stylesLibs  = require('./styles-libs');
 const js          = require('./js');
@@ -20,13 +24,22 @@ const videos      = require('./videos');
 
 
 module.exports = function server(done) {
+  const env = args.env || 'dev';
+
   browserSync.init({
     server: config.dist.dist,
     notify: false,
     cors: true
   });                                                                                                         // Инициализируем сервер
 
-  watch(config.watch.pug, { usePolling: true }, series(templates));                                           // Следим за именениями в папке templates
+
+  if (env === 'prod') watch(config.watch.pug, { usePolling: true }, series(templates));                       // Следим за именениями в папке templates
+  if (env === 'dev') {
+    watch(config.app.emitty, { usePolling: true }, series(templates))
+      .on('all', (event, changed) => {
+        global.state.watch.templates = changed;                                                               // Регистрирует измененный файл для задачи templates
+      });                                                                                                     // Следим за изменениями в папке templates и всхе вложенных
+  }
   watch(config.watch.html).on('change', browserSync.reload);                                                  // Следим за именениями в папке public (только файлы с расширением .html)
   watch(config.watch.styles, { usePolling: true }, series(styles)).on('change', browserSync.reload);          // Следим за изменениями в папке styles (только файлы с расширением .scss)
   watch(config.watch.stylesLibs, { usePolling: true }, series(stylesLibs)).on('change', browserSync.reload);  // Следим за изменениями в папке styles, файл libs.css

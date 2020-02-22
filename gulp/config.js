@@ -4,6 +4,7 @@ module.exports = {
 
   app: {
     pug:            'src/templates/*.pug',
+    emitty:         'src/templates/**/*.pug',
     styles:         'src/styles/style.scss',
     stylesLibs:     'src/styles/libs.css',
     scripts:        'src/js/script.js',

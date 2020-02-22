@@ -8,9 +8,9 @@ const config        = require('../config.js');
 const {
   plumber,
   notify,
-  pug,
+  pug
 } 	                = require('gulp-load-plugins')();
-const htmlValidator = require ('gulp-w3c-html-validator') ;
+const htmlValidator = require ('gulp-w3c-html-validator');
 
 
 module.exports = function templates() {

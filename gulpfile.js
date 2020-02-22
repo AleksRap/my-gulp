@@ -2,11 +2,14 @@
 
 const {
   series,
-  parallel,
+  parallel
 }                 = require('gulp');
+const args        = require('yargs').argv;
+
+const env = args.env || 'dev';
 
 
-const templates   = require('./gulp/tasks/templates');
+const templates   = (env === 'dev') ? require('./gulp/tasks/template-incremental-build') : require('./gulp/tasks/templates');
 const replaceUrl  = require('./gulp/tasks/replace-url');
 const styles      = require('./gulp/tasks/styles');
 const stylesLibs  = require('./gulp/tasks/styles-libs');
@@ -26,4 +29,5 @@ const server      = require('./gulp/tasks/server');
 const dev         = parallel(series(templates, replaceUrl), styles, stylesLibs, js, jsLibs, fonts, fontsTFF, img, svg, sprite, docs, videos);
 const build       = series(clean, dev);
 
-module.exports.default = series(build, server);
+if (env === 'dev') module.exports.default = series(build, server);
+if (env === 'prod') module.exports.default = series(build);
