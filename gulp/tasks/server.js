@@ -41,7 +41,8 @@ module.exports = function server(done) {
       });                                                                                                     // Следим за изменениями в папке templates и всхе вложенных
   }
   watch(config.watch.html).on('change', browserSync.reload);                                                  // Следим за именениями в папке public (только файлы с расширением .html)
-  watch(config.watch.styles, { usePolling: true }, series(styles)).on('change', browserSync.reload);          // Следим за изменениями в папке styles (только файлы с расширением .scss)
+  watch(config.watch.styles, { usePolling: true }, series(styles));                                           // Следим за изменениями в папке styles (только файлы с расширением .scss)
+  watch(config.watch.css).on('change', browserSync.reload);                                                   // Следим за именениями в папке public/css файл style.css
   watch(config.watch.stylesLibs, { usePolling: true }, series(stylesLibs)).on('change', browserSync.reload);  // Следим за изменениями в папке styles, файл libs.css
   watch(config.watch.scripts, { usePolling: true }, series(js)).on('change', browserSync.reload);             // Следим за изменениями в папке js (кроме файла libs.js)
   watch(config.watch.scriptsLibs, { usePolling: true }, series(jsLibs)).on('change', browserSync.reload);     // Следим за изменениями в папке js, файл libs.js

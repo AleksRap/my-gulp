@@ -23,6 +23,7 @@ module.exports = {
     pug:            'src/templates/**/*.pug',
     html:           'public/*.html',
     styles:         'src/styles/**/*.scss',
+    css:            'public/css/style.css',
     stylesLibs:     'src/styles/libs.css',
     scripts:        ['src/js/**/*.js', '!src/js/libs.js'],
     scriptsLibs:    'src/js/libs.js',
