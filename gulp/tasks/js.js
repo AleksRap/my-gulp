@@ -31,7 +31,7 @@ module.exports = function js() {
       prefix:   '@@',
       basepath: './src/js/modules/'
     }))                                                                 // Инклудим модули
-    .pipe(babel({presets: ['@babel/env']}))                             // Транспилируем через babel
+    .pipe(babel({presets: []}))                                         // Транспилируем через babel
     .pipe(gulpif((env === 'prod'), uglify()))                           // Если prod === true, то минифицируем скрипты
     .pipe(gulpif((env === 'prod'), rename({suffix: '.min'})))           // Если prod === true, то добавляем суффикс min
     .pipe(gulpif((env === 'prod'), sourcemaps.write('.')))              // Если prod === true, то добавляем map файл
