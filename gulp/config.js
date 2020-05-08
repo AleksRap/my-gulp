@@ -45,8 +45,8 @@ module.exports = {
     fonts:          'src/fonts/**/*.woff',
     fontsttf:       'src/fonts/**/*.ttf',
     img:            'src/images/*',
-    svg:            ['src/svg/**/*.svg', '!src/images/sprite/**/*.svg'],
-    sprite:         'src/images/sprite/**/*.svg',
+    svg:            ['src/svg/**/*.svg', '!src/svg/sprite/**/*.svg'],
+    sprite:         'src/svg/sprite/**/*.svg',
     docs:           'src/docs/**/*',
     videos:         'src/videos/**/*'
   },
