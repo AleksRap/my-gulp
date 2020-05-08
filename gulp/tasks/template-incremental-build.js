@@ -1,3 +1,4 @@
+const fs              = require('fs');
 const {
   src,
   dest
@@ -38,18 +39,26 @@ function getFilter(taskName) {
   });
 }                                                                                 // Функция для фильтрации измененных файлов
 
-module.exports = function templates() {
+module.exports = function templates(done) {
 
-  return src(config.app.pug)
-    .pipe(getFilter('templates'))                                                 // Выполняем фильтрацию
-    .pipe(debug())                                                                // Показываем сколько файлов было пересобрано
-    .pipe(plumber({
-      errorHandler: notify.onError({
-        title: 'PUG',
-        message: '<%= error.message %>'
-      })
-    }))                                                                           // При ошибках компиляции не останавливаем процесс слежения, выводим ошибку
-    .pipe(pug({pretty: true}))                                                    // Компилируем, запрещая минифицировать HTML
-    .pipe(htmlValidator())                                                        // W3C html валидатор
-    .pipe(dest(config.dist.dist))                                                 // Выгружаем в папку public
+  fs.access(config.check.pug, error => {
+    if (error) {
+      return done();
+    } else {
+      done();
+
+      return src(config.app.pug)
+        .pipe(getFilter('templates'))                                             // Выполняем фильтрацию
+        .pipe(debug())                                                            // Показываем сколько файлов было пересобрано
+        .pipe(plumber({
+          errorHandler: notify.onError({
+            title: 'PUG',
+            message: '<%= error.message %>'
+          })
+        }))                                                                       // При ошибках компиляции не останавливаем процесс слежения, выводим ошибку
+        .pipe(pug({pretty: true}))                                                // Компилируем, запрещая минифицировать HTML
+        .pipe(htmlValidator())                                                    // W3C html валидатор
+        .pipe(dest(config.dist.dist))                                             // Выгружаем в папку public
+    }
+  });
 };

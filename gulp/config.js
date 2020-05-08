@@ -2,6 +2,21 @@
 
 module.exports = {
 
+  check: {
+    pug:            'src/templates',
+    styles:         'src/styles/style.scss',
+    stylesLibs:     'src/styles/libs.css',
+    scripts:        'src/js/script.js',
+    scriptsLibs:    'src/js/libs.js',
+    fonts:          'src/fonts',
+    img:            'src/images',
+    svg:            'src/svg',
+    sprite:         'src/svg/sprite',
+    spriteStyles:   'src/styles/sprite',
+    docs:           'src/docs',
+    videos:         'src/videos',
+  },
+
   app: {
     pug:            'src/templates/*.pug',
     emitty:         'src/templates/**/*.pug',

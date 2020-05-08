@@ -1,3 +1,4 @@
+const fs        = require('fs');
 const {
   src,
   dest
@@ -12,7 +13,6 @@ module.exports = function replaceUrl() {
   const env = args.env || 'dev';
 
   return src(config.dist.html)
-
     .pipe(gulpif((env === 'prod'), replace('css/libs.css', 'css/libs.min.css')))      // Заменяем ссылку
     .pipe(gulpif((env === 'prod'), replace('css/style.css', 'css/style.min.css')))    // Заменяем ссылку
     .pipe(gulpif((env === 'prod'), replace('js/libs.js', 'js/libs.min.js')))          // Заменяем ссылку

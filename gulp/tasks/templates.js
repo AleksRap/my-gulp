@@ -1,5 +1,4 @@
-'use strict';
-
+const fs            = require('fs');
 const {
   src,
   dest
@@ -24,6 +23,5 @@ module.exports = function templates() {
     }))                                   // При ошибках компиляции не останавливаем процесс слежения, выводим ошибку
     .pipe(pug({pretty: true}))            // Компилируем, запрещая минифицировать HTML
     .pipe(htmlValidator())                // W3C html валидатор
-    .pipe(dest(config.dist.dist))         // Выгружаем в папку public
-
+    .pipe(dest(config.dist.dist));        // Выгружаем в папку public
 };
