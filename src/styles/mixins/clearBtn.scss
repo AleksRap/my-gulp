@@ -1,0 +1,11 @@
+@mixin clearBtn() {
+  cursor: pointer;
+
+  padding: 0;
+
+  background-color: transparent;
+
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

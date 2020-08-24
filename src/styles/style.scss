@@ -1,5 +1,21 @@
+// Functions
+@import "functions/rem";
+
+// Mixins
+@import "mixins/clearList";
+@import "mixins/clearBtn";
+@import "mixins/arrow";
+@import "mixins/center";
+@import "mixins/dotdotdot";
+
+// Base
+@import 'base/base';
+@import 'base/variables';
+@import 'base/fonts';
+
+// Components
 @import 'layout/header';
 @import 'layout/footer';
-@import 'components/variables';
-@import 'components/fonts';
 @import 'sprite/sprite';
+
+// Pages
